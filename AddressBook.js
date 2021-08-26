@@ -1,4 +1,4 @@
-//Find the person and Deleting person name from array
+//Ability To Find Number Of Contacts In address book
 const prompt = require('prompt-sync')();
 
 let nameRegex = RegExp("^[A-Z]{1}[a-z]{2,}$");
@@ -62,6 +62,8 @@ let getContact = () => {
     return contactInput;
 };
 
+let countContacts = () => addressBookArr.reduce((total, contact) => total + 1, 0);    // Using reduce Function to get the count
+
 let viewContacts = () => {
     addressBookArr.forEach(contact => console.log(contact.toString()));
 }
@@ -87,9 +89,10 @@ let editContact = () => {
     }
 }
 
+// delete contact UC5
 let deleteContact = () => {
     let frstName = prompt("Enter First Name : ");
-    let lstName = prompt("Enter Last Name : ");
+    let lstName = prompt("Enter Lastt Name : ");
     let index = getindexByName(frstName, lstName);
     if (index == -1)
         console.log("Could not find the contact!!")
@@ -99,8 +102,6 @@ let deleteContact = () => {
 
     }
 }
-
-        console.log("Welcome to AddressBook Program!!");
         let choice = 0;
         do {
             console.log("Choose\n1. View Contacts\n2. Add Contact\n3. Edit Contact By name\n4. Delete Contact\n5. Exit");
@@ -114,7 +115,7 @@ let deleteContact = () => {
                     break;
                 case "4": console.log(deleteContact());
                     break;
-                case "5": console.log("Thank You!!");
+                case "5": console.log("Bye!!");
                     break;
                 default: console.log("Invalid Choice !!");
             }
