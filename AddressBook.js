@@ -1,4 +1,6 @@
-//Validate contacts in address book
+// Adding contacts
+const prompt = require('prompt-sync')();
+
 let nameRegex = RegExp("^[A-Z]{1}[a-z]{2,}$");
 let addressRegex = RegExp("^[A-Za-z]{4,}$");
 let cityStateRegex = RegExp("^[A-Za-z]{4,}$");
@@ -34,13 +36,49 @@ class AddressBook {
     }
 
     toString() {
-        return "First Name : " + this.firstName + "\nLast Name : " + this.lastName + "\nAddress : " + this.address + "\nCity : " + this.city + "\nState : " + this.state + "\nZip : " + this.zip + "\nPhone Number : " + this.phoneNumber + "\nEmail : " + this.email;
+        return "First Name : " + this.firstName + ", Last Name : " + this.lastName + ", Address : " + this.address + ", City : " + this.city + ", State : " + this.state + ", Zip : " + this.zip + ", Phone Number : " + this.phoneNumber + ", Email : " + this.email;
     }
 }
 
-try {
-    let addressBook = new AddressBook("Rohit", "Patro", "Bijipur", "Berhampur", "Odisha", "760001",  "8249632998", "rohitpatro6@gmail.com");
-    console.log(addressBook.toString());
-} catch(error) {
-    console.error(error);
+
+let addressBookArr = new Array();
+
+let getContact = () => {
+    let firstName = prompt("Enter First Name ");
+    let lastName = prompt("Enter Last Name ");
+    let address = prompt("Enter Address ");
+    let city = prompt("Enter City ");
+    let state = prompt("Enter State ");
+    let zip = prompt("Enter Zip ");
+    let phoneNumber = prompt("Enter Phone Number ");
+    let email = prompt("Enter Email ");
+    let contactInput = null;
+
+    try {
+        contactInput = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
+    } catch (error) {
+        console.error(error);
+    }
+    return contactInput;
+};
+
+let addContact = (contact) => {
+    addressBookArr.push(contact);
+    console.log("Contact Added Successfully!!")
 }
+
+console.log("Welcome to AddressBook Program!!");
+let choice = 0;
+
+do {
+    console.log("Choose\n1. Add Contact\n2. Exit");
+    choice = prompt("Enter Your Choice ");
+    switch (choice) {
+        case "1": addContact(getContact());
+            break;
+        case "2": console.log("Thankyou!");
+            break;
+        default: console.log("Invalid Choice !!");
+    }
+
+} while (choice != 2)
